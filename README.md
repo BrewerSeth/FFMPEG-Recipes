@@ -32,3 +32,18 @@ ffmpeg -i input.mp4 -vf scale=1920:-2 -r 30 -c:v libx264 -crf 23 output.mp4
 - `-r 30` - Sets frame rate to 30fps (smooth playback)
 - `-c:v libx264 -crf 23` - H.264 codec with higher quality (lower CRF = better quality)
 - Audio is preserved for better quality communication
+
+### Teams-Optimized Screen Recording (Fast)
+
+Convert a Mac screen recording to double speed, 15fps, and 1080p height for Teams sharing.
+
+```bash
+ffmpeg -i input.mov -vf "setpts=0.5*PTS,scale=-2:1080" -r 15 -c:v libx264 -crf 23 output.mp4
+```
+
+**What it does:**
+- `setpts=0.5*PTS` - Doubles the playback speed
+- `scale=-2:1080` - Sets height to 1080px, maintains aspect ratio (width rounded to even number)
+- `-r 15` - Sets frame rate to 15fps
+- `-c:v libx264 -crf 23` - H.264 codec with high quality for Teams sharing
+
